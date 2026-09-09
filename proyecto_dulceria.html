@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Detalle del Proyecto: Sistema ERP - Dulcería Lili's. Desarrollado por Vicente.">
+    <title>Sistema ERP - Dulcería Lili's | Vicente.dev</title>
+    <link rel="icon" type="image/png" href="images/icono.png">
+
+    <!-- Google Fonts: Outfit & Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Outfit:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Devicon Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicon/devicon@v2.15.1/devicon.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Estilos dedicados para la vista de detalle del proyecto */
+        .project-page-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 8rem 1.5rem 5rem 1.5rem;
+        }
+
+        .back-nav-bar {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-glass);
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.08);
+            transform: translateX(-4px);
+        }
+
+        .project-detail-hero {
+            padding: 3rem 2.5rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-detail-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+        }
+
+        .project-detail-body {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .detail-section-card {
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+        }
+
+        .detail-actions-bar {
+            margin-top: 3rem;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .project-page-container {
+                padding-top: 6.5rem;
+            }
+            .project-detail-hero,
+            .detail-section-card,
+            .detail-actions-bar {
+                padding: 1.75rem 1.25rem;
+            }
+            .detail-actions-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .detail-actions-bar .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Encabezado / Header -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-badge">VD</span>
+                <span class="logo-text">Vicente<span class="dot">.</span>dev</span>
+            </a>
+
+            <nav class="nav-menu">
+                <a href="index.html#about" class="nav-link"><i class="fa-solid fa-user"></i> Sobre mí</a>
+                <a href="index.html#proyectos" class="nav-link active"><i class="fa-solid fa-diagram-project"></i> Proyectos</a>
+                <a href="index.html#habilidades" class="nav-link"><i class="fa-solid fa-code"></i> Habilidades</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="index.html#contacto" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-paper-plane"></i> Contactar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="project-page-container">
+        <!-- Barra de navegación de retorno -->
+        <div class="back-nav-bar">
+            <a href="index.html#proyectos" class="btn-back">
+                <i class="fa-solid fa-arrow-left"></i> Volver a Proyectos
+            </a>
+            <span class="status-badge" style="margin: 0;">
+                <span class="pulse-dot"></span> Proyecto Completado
+            </span>
+        </div>
+
+        <!-- Hero del Proyecto -->
+        <section class="project-detail-hero glass-card">
+            <div class="modal-badges-row">
+                <span class="project-badge badge-cyan"><i class="fa-solid fa-store"></i> Web Systems</span>
+                <span class="modal-pill-tag"><i class="fa-solid fa-cubes"></i> Sistema ERP</span>
+            </div>
+
+            <h1 class="modal-project-title" style="font-size: 2.8rem; margin: 0.5rem 0;">
+                Sistema ERP - Dulcería Lili's
+            </h1>
+            <p class="modal-project-subtitle" style="font-size: 1.3rem;">
+                Sistema de Gestión para Negocios / Dulcería
+            </p>
+
+            <div class="modal-project-focus" style="margin-top: 1.25rem;">
+                <i class="fa-solid fa-bullseye"></i> <strong>Enfoque:</strong> Interfaz responsiva moderna diseñada con Bootstrap, lógica web y persistencia de datos local/relacional.
+            </div>
+        </section>
+
+        <div class="project-detail-body">
+            <!-- 1. Mi Rol -->
+            <section class="detail-section-card glass-card">
+                <div class="modal-block-title">
+                    <span class="block-number">1</span>
+                    <h2 style="font-size: 1.6rem; font-weight: 700;">Mi Rol</h2>
+                </div>
+
+                <div class="modal-role-card">
+                    <div class="role-badge-pill">
+                        <i class="fa-solid fa-layer-group"></i> Desarrollador Full-Stack / Arquitecto de Software
+                    </div>
+                    <p class="role-description" style="font-size: 1.05rem;">
+                        Encargado del diseño de la arquitectura cliente-servidor, desarrollo del prototipo integral (frontend y backend) e infraestructura en la nube. Responsable de la escalabilidad, seguridad y requerimientos operativos.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 2. Funcionalidades del Proyecto -->
+            <section class="detail-section-card glass-card">
+                <div class="modal-block-title">
+                    <span class="block-number">2</span>
+                    <h2 style="font-size: 1.6rem; font-weight: 700;">Funcionalidades del Proyecto</h2>
+                </div>
+                <p class="modal-lead-text" style="font-size: 1.1rem; margin-bottom: 1.75rem;">
+                    <strong>Gestión Integral:</strong> Módulos de Inventario, Compras, Producción, Ventas y Costos.
+                </p>
+
+                <div class="modules-grid">
+                    <div class="module-card">
+                        <div class="module-icon-box"><i class="fa-solid fa-boxes-stacked"></i></div>
+                        <div>
+                            <h3 class="module-title">Inventario</h3>
+                            <p class="module-desc">Control y stock en tiempo real de materias primas, insumos y productos terminados con alertas automáticas de reposición.</p>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-icon-box"><i class="fa-solid fa-cart-shopping"></i></div>
+                        <div>
+                            <h3 class="module-title">Compras</h3>
+                            <p class="module-desc">Gestión y registro de órdenes de abastecimiento con proveedores, control de comprobantes y trazabilidad de insumos.</p>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-icon-box"><i class="fa-solid fa-gears"></i></div>
+                        <div>
+                            <h3 class="module-title">Producción</h3>
+                            <p class="module-desc">Fórmulas de elaboración, cálculo de insumos por lote de dulces y balance de rendimiento en la fabricación.</p>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-icon-box"><i class="fa-solid fa-cash-register"></i></div>
+                        <div>
+                            <h3 class="module-title">Ventas</h3>
+                            <p class="module-desc">Terminal de Punto de Venta (POS) rápido, emisión de tickets, flujo de caja diario y múltiples medios de cobro.</p>
+                        </div>
+                    </div>
+                    <div class="module-card module-card-highlight">
+                        <div class="module-icon-box"><i class="fa-solid fa-chart-line"></i></div>
+                        <div>
+                            <h3 class="module-title">Costos</h3>
+                            <p class="module-desc">Análisis exhaustivo de márgenes de utilidad neta, costos operativos directos/indirectos y balance financiero integral.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tecnologías Clave -->
+            <section class="detail-section-card glass-card">
+                <div class="modal-block-title">
+                    <span class="block-number"><i class="fa-solid fa-microchip"></i></span>
+                    <h2 style="font-size: 1.6rem; font-weight: 700;">Tecnologías Clave</h2>
+                </div>
+                <div class="tech-chips-list">
+                    <span class="tech-chip"><i class="devicon-html5-plain colored"></i> HTML5</span>
+                    <span class="tech-chip"><i class="devicon-css3-plain colored"></i> CSS3</span>
+                    <span class="tech-chip"><i class="devicon-javascript-plain colored"></i> JavaScript Vanilla</span>
+                    <span class="tech-chip"><i class="devicon-bootstrap-plain colored"></i> Bootstrap 5</span>
+                    <span class="tech-chip"><i class="devicon-sqlite-plain colored"></i> SQLite</span>
+                </div>
+            </section>
+
+            <!-- Capturas / Galería del Sistema (Placeholders) -->
+            <section class="detail-section-card glass-card">
+                <div class="modal-block-title">
+                    <span class="block-number"><i class="fa-solid fa-image"></i></span>
+                    <h2 style="font-size: 1.6rem; font-weight: 700;">Capturas y Vistas del Sistema</h2>
+                </div>
+                <p class="gallery-helper-text">
+                    Espacio preparado para previsualizar capturas de pantalla del panel administrativo y módulos operativos:
+                </p>
+
+                <div class="captures-grid">
+                    <!-- Placeholder 1: Dashboard -->
+                    <div class="capture-card">
+                        <div class="capture-preview-box">
+                            <!-- Reemplazar con: <img src="images/erp-dashboard.png" alt="Dashboard Principal" class="capture-img"> -->
+                            <div class="capture-placeholder">
+                                <i class="fa-solid fa-chart-pie placeholder-icon"></i>
+                                <span class="placeholder-tag">Dashboard Principal</span>
+                                <span class="placeholder-caption">Métricas de Ventas, Stock Crítico y Balance</span>
+                            </div>
+                        </div>
+                        <div class="capture-info">
+                            <h5>Dashboard & KPIs Operativos</h5>
+                            <p>Visión general del estado del negocio en tiempo real.</p>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder 2: Inventario -->
+                    <div class="capture-card">
+                        <div class="capture-preview-box">
+                            <!-- Reemplazar con: <img src="images/erp-inventario.png" alt="Módulo de Inventario" class="capture-img"> -->
+                            <div class="capture-placeholder">
+                                <i class="fa-solid fa-table-list placeholder-icon"></i>
+                                <span class="placeholder-tag">Módulo de Inventario</span>
+                                <span class="placeholder-caption">Catálogo de Productos, Materias Primas y Kardex</span>
+                            </div>
+                        </div>
+                        <div class="capture-info">
+                            <h5>Control de Inventario & Stock</h5>
+                            <p>Administración y trazabilidad de insumos de dulcería.</p>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder 3: POS / Ventas -->
+                    <div class="capture-card">
+                        <div class="capture-preview-box">
+                            <!-- Reemplazar con: <img src="images/erp-pos.png" alt="Punto de Venta" class="capture-img"> -->
+                            <div class="capture-placeholder">
+                                <i class="fa-solid fa-receipt placeholder-icon"></i>
+                                <span class="placeholder-tag">Punto de Venta (POS)</span>
+                                <span class="placeholder-caption">Cobro Rápido, Boletas e Historial de Transacciones</span>
+                            </div>
+                        </div>
+                        <div class="capture-info">
+                            <h5>Ventas & Facturación</h5>
+                            <p>Terminal interactivo optimizado para atención al público.</p>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder 4: Producción & Costos -->
+                    <div class="capture-card">
+                        <div class="capture-preview-box">
+                            <!-- Reemplazar con: <img src="images/erp-costos.png" alt="Producción y Costos" class="capture-img"> -->
+                            <div class="capture-placeholder">
+                                <i class="fa-solid fa-calculator placeholder-icon"></i>
+                                <span class="placeholder-tag">Producción & Costos</span>
+                                <span class="placeholder-caption">Fórmulas por Lote y Análisis de Rentabilidad</span>
+                            </div>
+                        </div>
+                        <div class="capture-info">
+                            <h5>Módulo de Producción</h5>
+                            <p>Recetas industriales y márgenes de ganancia por producto.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Barra de Acciones Final -->
+            <section class="detail-actions-bar glass-card">
+                <div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.35rem; color: #fff;">¿Interesado en implementar un sistema similar?</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Contáctame para diseñar una solución a la medida de tu negocio.</p>
+                </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="index.html#proyectos" class="btn btn-outline">
+                        <i class="fa-solid fa-arrow-left"></i> Otros Proyectos
+                    </a>
+                    <a href="index.html#contacto" class="btn btn-primary">
+                        <i class="fa-solid fa-paper-plane"></i> Contactar Ahora
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>© 2026 Vicente — Portafolio Profesional.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

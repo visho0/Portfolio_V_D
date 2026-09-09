@@ -722,3 +722,504 @@ body {
         padding: 4rem 0;
     }
 }
+
+/* ==========================================================================
+   ESTILOS DE VENTANA MODAL (DETALLE DE PROYECTO)
+   ========================================================================== */
+
+/* Botón de activación en la tarjeta */
+.modal-trigger-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: var(--font-heading);
+}
+
+#card-dulceria-erp {
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+#card-dulceria-erp:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 242, 254, 0.25);
+}
+
+/* Contenedor principal modal */
+.project-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+}
+
+.project-modal.is-active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Fondo oscuro con desenfoque */
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 7, 14, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Envoltorio de diálogo */
+.modal-dialog-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 900px;
+    max-height: 92vh;
+    padding: 1.25rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Tarjeta de contenido del modal */
+.modal-content-card {
+    background: linear-gradient(160deg, rgba(14, 20, 34, 0.96) 0%, rgba(9, 13, 23, 0.98) 100%);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 242, 254, 0.15);
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 2.5rem 2.25rem;
+    position: relative;
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-modal.is-active .modal-content-card {
+    transform: scale(1) translateY(0);
+}
+
+/* Estilo de scrollbar personalizado */
+.modal-content-card::-webkit-scrollbar {
+    width: 7px;
+}
+.modal-content-card::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+}
+.modal-content-card::-webkit-scrollbar-thumb {
+    background: rgba(0, 242, 254, 0.35);
+    border-radius: 10px;
+}
+.modal-content-card::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-cyan);
+}
+
+/* Botón de cerrar superior */
+.modal-close-button {
+    position: absolute;
+    top: 1.35rem;
+    right: 1.35rem;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-glass);
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    z-index: 10;
+}
+
+.modal-close-button:hover {
+    background: rgba(0, 242, 254, 0.15);
+    border-color: var(--accent-cyan);
+    color: #fff;
+    transform: rotate(90deg) scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+}
+
+/* Encabezado del modal */
+.modal-header-section {
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 1.75rem;
+    margin-bottom: 2rem;
+    padding-right: 2.5rem;
+}
+
+.modal-badges-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.modal-pill-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 50px;
+    background: rgba(157, 78, 221, 0.15);
+    color: var(--accent-purple);
+    border: 1px solid rgba(157, 78, 221, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.modal-project-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.5px;
+}
+
+.modal-project-subtitle {
+    font-size: 1.15rem;
+    color: var(--accent-cyan);
+    font-weight: 600;
+    margin-bottom: 0.85rem;
+}
+
+.modal-project-focus {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--accent-cyan);
+    padding: 0.75rem 1rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.modal-project-focus i {
+    color: var(--accent-cyan);
+    margin-right: 5px;
+}
+
+/* Bloques de sección */
+.modal-section-block {
+    margin-bottom: 2.25rem;
+}
+
+.modal-block-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.1rem;
+}
+
+.modal-block-title h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.block-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(79, 172, 254, 0.2));
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+}
+
+/* 1. Tarjeta de Rol */
+.modal-role-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-role-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+}
+
+.role-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.85rem;
+}
+
+.role-badge-pill i {
+    color: var(--accent-cyan);
+}
+
+.role-description {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 0.98rem;
+}
+
+/* 2. Cuadrícula de Funcionalidades */
+.modal-lead-text {
+    color: var(--text-main);
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+}
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.1rem;
+}
+
+.module-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+}
+
+.module-card:hover {
+    border-color: rgba(0, 242, 254, 0.4);
+    background: rgba(0, 242, 254, 0.04);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.module-card-highlight {
+    border-color: rgba(157, 78, 221, 0.3);
+}
+
+.module-card-highlight:hover {
+    border-color: var(--accent-purple);
+    background: rgba(157, 78, 221, 0.06);
+}
+
+.module-icon-box {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 10px;
+    background: rgba(0, 242, 254, 0.1);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-cyan);
+    font-size: 1.2rem;
+}
+
+.module-card-highlight .module-icon-box {
+    background: rgba(157, 78, 221, 0.15);
+    border-color: rgba(157, 78, 221, 0.3);
+    color: var(--accent-purple);
+}
+
+.module-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.35rem;
+}
+
+.module-desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+/* Tecnologías Chips */
+.tech-chips-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    font-family: var(--font-code);
+    font-size: 0.88rem;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+}
+
+.tech-chip:hover {
+    border-color: var(--accent-cyan);
+    background: rgba(0, 242, 254, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+}
+
+.tech-chip i {
+    font-size: 1.15rem;
+}
+
+/* Galería de Capturas / Placeholders */
+.gallery-helper-text {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 1.25rem;
+}
+
+.captures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.capture-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.capture-card:hover {
+    border-color: rgba(0, 242, 254, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 242, 254, 0.15);
+}
+
+.capture-preview-box {
+    width: 100%;
+    height: 175px;
+    background: #080c16;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.capture-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.25rem;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 242, 254, 0.08) 0%, rgba(8, 12, 22, 0.95) 75%);
+}
+
+.placeholder-icon {
+    font-size: 2.2rem;
+    color: var(--accent-cyan);
+    margin-bottom: 4px;
+    opacity: 0.85;
+    transition: transform 0.3s ease;
+}
+
+.capture-card:hover .placeholder-icon {
+    transform: scale(1.15);
+    color: #fff;
+    filter: drop-shadow(0 0 10px var(--accent-cyan));
+}
+
+.placeholder-tag {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(0, 242, 254, 0.15);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.placeholder-caption {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    max-width: 240px;
+}
+
+.capture-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.capture-info {
+    padding: 1rem 1.15rem;
+}
+
+.capture-info h5 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.25rem;
+}
+
+.capture-info p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Pie del modal */
+.modal-footer-section {
+    border-top: 1px solid var(--border-glass);
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Responsive Modal */
+@media (max-width: 640px) {
+    .modal-content-card {
+        padding: 1.75rem 1.25rem;
+    }
+    .modal-project-title {
+        font-size: 1.6rem;
+    }
+    .modal-footer-section {
+        flex-direction: column;
+    }
+    .modal-footer-section .btn {
+        width: 100%;
+    }
+}
