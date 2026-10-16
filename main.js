@@ -53,4 +53,50 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
         animateObserver.observe(el);
     });
+
+    // --- Lógica Modular de Modales Accesibles (Vanilla JS) ---
+    function setupModal(triggerId, modalId) {
+        const trigger = document.getElementById(triggerId);
+        const modal = document.getElementById(modalId);
+        if (!trigger || !modal) return;
+
+        const openBtn = trigger.querySelector('.project-link') || trigger;
+        const closeButtons = modal.querySelectorAll('.modal-close-button, .modal-footer-section .btn');
+
+        function openModal(e) {
+            if (e) e.preventDefault();
+            modal.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('is-active');
+            document.body.style.overflow = '';
+        }
+
+        trigger.addEventListener('click', openModal);
+        if (openBtn !== trigger) {
+            openBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModal(e);
+            });
+        }
+
+        closeButtons.forEach(btn => btn.addEventListener('click', closeModal));
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+                closeModal();
+            }
+        });
+    }
+
+    setupModal('card-terapeutas-chile', 'modal-terapeutas');
+    setupModal('card-security-audit', 'modal-security');
 });

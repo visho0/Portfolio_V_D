@@ -746,6 +746,26 @@ body {
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 242, 254, 0.25);
 }
 
+#card-terapeutas-chile {
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+#card-terapeutas-chile:hover {
+    border-color: var(--accent-purple);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(157, 78, 221, 0.25);
+}
+
+#card-security-audit {
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+#card-security-audit:hover {
+    border-color: var(--accent-green);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 245, 160, 0.25);
+}
+
 /* Contenedor principal modal */
 .project-modal {
     position: fixed;
