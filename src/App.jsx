@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
 import ProyectoDulceria from './pages/ProyectoDulceria'
+import ProyectoTerapeutas from './pages/ProyectoTerapeutas'
 
 function App() {
     const [currentPage, setCurrentPage] = useState(() => {
@@ -49,6 +50,9 @@ function App() {
         switch (currentPage) {
             case '/proyecto-dulceria':
                 return <ProyectoDulceria navigate={navigate} />
+            case '/proyecto-terapeutas':
+            case '/proyecto-terapeutas-chile':
+                return <ProyectoTerapeutas navigate={navigate} />
             case '/':
             default:
                 return <HomePage navigate={navigate} />

@@ -2,17 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 
 export default function HomePage({ navigate }) {
     const mainRef = useRef(null)
-    const [isTerapeutasModalOpen, setIsTerapeutasModalOpen] = useState(false)
     const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false)
-
-    const openTerapeutasModal = useCallback((e) => {
-        if (e && e.preventDefault) e.preventDefault()
-        setIsTerapeutasModalOpen(true)
-    }, [])
-
-    const closeTerapeutasModal = useCallback(() => {
-        setIsTerapeutasModalOpen(false)
-    }, [])
 
     const openSecurityModal = useCallback((e) => {
         if (e && e.preventDefault) e.preventDefault()
@@ -25,11 +15,10 @@ export default function HomePage({ navigate }) {
 
     // Lock body scroll & handle Escape key when modal is open
     useEffect(() => {
-        if (isTerapeutasModalOpen || isSecurityModalOpen) {
+        if (isSecurityModalOpen) {
             document.body.style.overflow = 'hidden'
             const handleEsc = (e) => {
                 if (e.key === 'Escape') {
-                    closeTerapeutasModal()
                     closeSecurityModal()
                 }
             }
@@ -41,7 +30,7 @@ export default function HomePage({ navigate }) {
         } else {
             document.body.style.overflow = ''
         }
-    }, [isTerapeutasModalOpen, isSecurityModalOpen, closeTerapeutasModal, closeSecurityModal])
+    }, [isSecurityModalOpen, closeSecurityModal])
 
     useEffect(() => {
         // --- Smooth Scroll e Indicador Navegación Activa Optimizado (Cero Layout Thrashing) ---
@@ -222,11 +211,11 @@ export default function HomePage({ navigate }) {
                             className="project-card glass-card text-center"
                             id="card-terapeutas-chile"
                             style={{ cursor: 'pointer' }}
-                            onClick={openTerapeutasModal}
+                            onClick={(e) => handleProjectClick(e, '/proyecto-terapeutas')}
                             role="button"
                             tabIndex={0}
                             aria-label="Ver detalles del proyecto Terapeutas Chile"
-                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openTerapeutasModal(e) }}
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleProjectClick(e, '/proyecto-terapeutas') }}
                         >
                             <div className="project-header">
                                 <span className="project-badge badge-purple"><i className="fa-solid fa-user-doctor"></i> Gestión Clínica</span>
@@ -243,151 +232,27 @@ export default function HomePage({ navigate }) {
                                 <span className="tech-tag">Organización de Datos</span>
                             </div>
                             <div className="project-footer">
-                                <a href="#" className="project-link" onClick={openTerapeutasModal}>
+                                <a
+                                    href="/proyecto-terapeutas"
+                                    className="project-link"
+                                    onClick={(e) => handleProjectClick(e, '/proyecto-terapeutas')}
+                                >
                                     <i className="fa-solid fa-laptop-code"></i> Ver Detalles <i className="fa-solid fa-chevron-right"></i>
                                 </a>
                             </div>
                         </article>
 
-                        {/* ===== MODAL: Terapeutas Chile ===== */}
-                        <div
-                            className={`project-modal${isTerapeutasModalOpen ? ' is-active' : ''}`}
-                            id="modal-terapeutas"
-                            role="dialog"
-                            aria-modal="true"
-                            aria-labelledby="modal-terapeutas-title"
-                            onClick={(e) => { if (e.target === e.currentTarget || e.target.classList.contains('modal-overlay')) closeTerapeutasModal() }}
-                        >
-                            <div className="modal-overlay" onClick={closeTerapeutasModal}></div>
-                            <div className="modal-dialog-wrapper">
-                                <div className="modal-content-card" onClick={(e) => e.stopPropagation()}>
-                                    {/* Botón cerrar */}
-                                    <button
-                                        className="modal-close-button"
-                                        onClick={closeTerapeutasModal}
-                                        aria-label="Cerrar modal"
-                                        title="Cerrar"
-                                    >
-                                        <i className="fa-solid fa-xmark"></i>
-                                    </button>
-
-                                    {/* Encabezado del modal */}
-                                    <div className="modal-header-section">
-                                        <div className="modal-badges-row">
-                                            <span className="modal-pill-tag">
-                                                <i className="fa-solid fa-user-doctor"></i> Gestión Clínica
-                                            </span>
-                                            <span className="modal-pill-tag" style={{ background: 'rgba(0, 242, 254, 0.15)', color: 'var(--accent-cyan)', borderColor: 'rgba(0, 242, 254, 0.3)' }}>
-                                                <i className="fa-solid fa-notes-medical"></i> Registros Médicos
-                                            </span>
-                                        </div>
-                                        <h2 className="modal-project-title" id="modal-terapeutas-title">Terapeutas Chile</h2>
-                                        <p className="modal-project-subtitle">Plataforma de Registros Médicos y Gestión Clínica</p>
-                                        <div className="modal-project-focus">
-                                            <i className="fa-solid fa-crosshairs"></i>
-                                            <strong>Enfoque:</strong> Interfaz funcional, maquetación adaptativa y organización de datos para la gestión clínica.
-                                        </div>
-                                    </div>
-
-                                    {/* Sección 1: Rol y Descripción */}
-                                    <div className="modal-section-block">
-                                        <div className="modal-block-title">
-                                            <span className="block-number">1</span>
-                                            <h3>Descripción del Proyecto</h3>
-                                        </div>
-                                        <div className="modal-role-card">
-                                            <div className="role-badge-pill">
-                                                <i className="fa-solid fa-laptop-medical"></i> Plataforma Clínica Digital
-                                            </div>
-                                            <p className="role-description">
-                                                Sistema orientado a la digitalización y organización de procesos clínicos en Chile.
-                                                La plataforma permite el registro, consulta y administración de fichas médicas de pacientes,
-                                                facilitando el trabajo de terapeutas y profesionales de salud con una interfaz clara,
-                                                funcional y completamente adaptativa a múltiples dispositivos.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* Sección 2: Funcionalidades Principales */}
-                                    <div className="modal-section-block">
-                                        <div className="modal-block-title">
-                                            <span className="block-number">2</span>
-                                            <h3>Funcionalidades Principales</h3>
-                                        </div>
-                                        <p className="modal-lead-text">
-                                            Módulos diseñados para cubrir las necesidades de gestión clínica:
-                                        </p>
-                                        <div className="modules-grid">
-                                            <div className="module-card">
-                                                <div className="module-icon-box">
-                                                    <i className="fa-solid fa-file-medical"></i>
-                                                </div>
-                                                <div>
-                                                    <p className="module-title">Fichas de Pacientes</p>
-                                                    <p className="module-desc">Registro estructurado de datos personales, historial médico y notas de sesión.</p>
-                                                </div>
-                                            </div>
-                                            <div className="module-card">
-                                                <div className="module-icon-box">
-                                                    <i className="fa-solid fa-calendar-check"></i>
-                                                </div>
-                                                <div>
-                                                    <p className="module-title">Agenda y Citas</p>
-                                                    <p className="module-desc">Organización de horarios, control de citas programadas y disponibilidad de profesionales.</p>
-                                                </div>
-                                            </div>
-                                            <div className="module-card module-card-highlight">
-                                                <div className="module-icon-box">
-                                                    <i className="fa-solid fa-table-columns"></i>
-                                                </div>
-                                                <div>
-                                                    <p className="module-title">Maquetación Adaptativa</p>
-                                                    <p className="module-desc">Diseño responsive que se ajusta a escritorio, tablet y móvil para uso en consulta.</p>
-                                                </div>
-                                            </div>
-                                            <div className="module-card module-card-highlight">
-                                                <div className="module-icon-box">
-                                                    <i className="fa-solid fa-database"></i>
-                                                </div>
-                                                <div>
-                                                    <p className="module-title">Organización de Datos</p>
-                                                    <p className="module-desc">Estructura lógica para consultar, filtrar y gestionar registros clínicos de forma eficiente.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Sección 3: Tecnologías */}
-                                    <div className="modal-section-block">
-                                        <div className="modal-block-title">
-                                            <span className="block-number">3</span>
-                                            <h3>Stack Tecnológico</h3>
-                                        </div>
-                                        <div className="tech-chips-list">
-                                            <span className="tech-chip">
-                                                <i className="devicon-html5-plain colored"></i> HTML5
-                                            </span>
-                                            <span className="tech-chip">
-                                                <i className="devicon-css3-plain colored"></i> CSS3
-                                            </span>
-                                            <span className="tech-chip">
-                                                <i className="devicon-javascript-plain colored"></i> JavaScript Vanilla
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    {/* Pie del modal */}
-                                    <div className="modal-footer-section">
-                                        <button className="btn btn-outline" onClick={closeTerapeutasModal}>
-                                            <i className="fa-solid fa-xmark"></i> Cerrar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         {/* Proyecto 2: Sistemas de Gestión Web */}
-                        <article className="project-card glass-card text-center" id="card-dulceria-erp">
+                        <article
+                            className="project-card glass-card text-center"
+                            id="card-dulceria-erp"
+                            style={{ cursor: 'pointer' }}
+                            onClick={(e) => handleProjectClick(e, '/proyecto-dulceria')}
+                            role="button"
+                            tabIndex={0}
+                            aria-label="Ver detalles del proyecto Sistema de Gestión Web (Dulcería)"
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleProjectClick(e, '/proyecto-dulceria') }}
+                        >
                             <div className="project-header">
                                 <span className="project-badge badge-cyan"><i className="fa-solid fa-store"></i> Web Systems</span>
                                 <div className="project-icon"><i className="fa-solid fa-cash-register"></i></div>
@@ -606,11 +471,11 @@ export default function HomePage({ navigate }) {
                         <div className="skill-category-box glass-card text-center">
                             <h3 className="category-title"><i className="fa-solid fa-desktop"></i> Front end</h3>
                             <div className="skill-tags">
-                                <span className="skill-chip"><i className="devicon-html5-plain colored"></i> HTML</span>
+                                <span class="stack-item" data-tech="html"><i class="fa-brands fa-html5 stack-item-icon"></i> HTML</span>
                                 <span className="skill-chip"><i className="devicon-css3-plain colored"></i> CSS</span>
                                 <span className="skill-chip"><i className="devicon-javascript-plain colored"></i> JavaScript</span>
                                 <span className="skill-chip"><i className="devicon-figma-plain colored"></i> Figma</span>
-                                <span className="skill-chip chip-cyan"><i className="devicon-react-original colored"></i> ReactJS</span>
+                                <span className="stack-item" data-tech="react"><i className="fa-brands fa-react stack-item-icon"></i>React</span>
                             </div>
                         </div>
 
@@ -645,7 +510,8 @@ export default function HomePage({ navigate }) {
                         <div className="skill-category-box glass-card text-center">
                             <h3 className="category-title"><i className="fa-solid fa-graduation-cap"></i> Aprendiendo</h3>
                             <div className="skill-tags">
-                                <span className="skill-chip chip-gold"><i className="devicon-python-plain colored"></i> Python</span>
+                                <span className="stack-item" data-tech="python"><i className="fa-brands fa-python stack-item-icon"></i>Python</span>
+                                <span className="stack-item" data-tech="javascript"><i className="fa-brands fa-js stack-item-icon"></i> JavaScript</span>
                             </div>
                         </div>
                     </div>
