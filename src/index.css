@@ -90,6 +90,8 @@ body {
     border: 1px solid var(--border-glass);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-glass);
+    transform: translateZ(0);
+    backface-visibility: hidden;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
         border-color 0.3s ease,
         box-shadow 0.3s ease;
@@ -1341,4 +1343,34 @@ body {
     .detail-actions-bar .btn {
         width: 100%;
     }
+}
+
+/* ==========================================================================
+   OPTIMIZACIONES DE RENDIMIENTO Y ACCESIBILIDAD
+   ========================================================================== */
+
+/* Saltarse el renderizado de secciones fuera de pantalla durante la carga inicial */
+#proyectos,
+#habilidades,
+#contacto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 700px;
+}
+
+/* Soporte para dispositivos o usuarios con preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Compatibilidad segura para Canvas y Motores de Física (Matter.js) */
+canvas {
+    touch-action: none;
+    max-width: 100%;
 }

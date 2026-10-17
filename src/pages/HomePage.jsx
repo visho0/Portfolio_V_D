@@ -44,58 +44,93 @@ export default function HomePage({ navigate }) {
     }, [isTerapeutasModalOpen, isSecurityModalOpen, closeTerapeutasModal, closeSecurityModal])
 
     useEffect(() => {
-        // --- Smooth Scroll e Indicador Navegación Activa ---
-        const navLinks = document.querySelectorAll('.nav-link')
-        const sections = document.querySelectorAll('section[id]')
+        // --- Smooth Scroll e Indicador Navegación Activa Optimizado (Cero Layout Thrashing) ---
+        const navLinks = Array.from(document.querySelectorAll('.nav-link'))
+        const sections = Array.from(document.querySelectorAll('section[id]'))
 
+        let cachedOffsets = []
+        function computeOffsets() {
+            cachedOffsets = sections.map(section => ({
+                id: section.getAttribute('id'),
+                top: section.offsetTop - 120,
+                bottom: section.offsetTop - 120 + section.offsetHeight
+            }))
+        }
+        computeOffsets()
+
+        let isTicking = false
         function highlightActiveNavLink() {
-            const scrollY = window.pageYOffset
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop
+            let currentId = ''
 
-            sections.forEach(section => {
-                const sectionHeight = section.offsetHeight
-                const sectionTop = section.offsetTop - 120
-                const sectionId = section.getAttribute('id')
-
-                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active')
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active')
-                        }
-                    })
+            for (let i = 0; i < cachedOffsets.length; i++) {
+                const { id, top, bottom } = cachedOffsets[i]
+                if (scrollY >= top && scrollY < bottom) {
+                    currentId = id
+                    break
                 }
-            })
+            }
+
+            if (currentId) {
+                navLinks.forEach(link => {
+                    const match = link.getAttribute('href') === `#${currentId}`
+                    link.classList.toggle('active', match)
+                })
+            }
         }
 
-        window.addEventListener('scroll', highlightActiveNavLink)
-
-        // --- Animación de Entrada Suave (Intersection Observer) ---
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        function onScroll() {
+            if (!isTicking) {
+                window.requestAnimationFrame(() => {
+                    highlightActiveNavLink()
+                    isTicking = false
+                })
+                isTicking = true
+            }
         }
 
-        const animateObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1'
-                    entry.target.style.transform = 'translateY(0)'
-                    observer.unobserve(entry.target)
-                }
-            })
-        }, observerOptions)
+        window.addEventListener('scroll', onScroll, { passive: true })
+        window.addEventListener('resize', computeOffsets, { passive: true })
 
+        // --- Animación de Entrada Suave (Intersection Observer con aceleración por GPU) ---
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
         const animateElements = document.querySelectorAll('.glass-card, .section-header')
-        animateElements.forEach(el => {
-            el.style.opacity = '0'
-            el.style.transform = 'translateY(25px)'
-            el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
-            animateObserver.observe(el)
-        })
+
+        let animateObserver = null
+        if (prefersReducedMotion) {
+            animateElements.forEach(el => {
+                el.style.opacity = '1'
+                el.style.transform = 'none'
+            })
+        } else {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            }
+
+            animateObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1'
+                        entry.target.style.transform = 'translateY(0)'
+                        observer.unobserve(entry.target)
+                    }
+                })
+            }, observerOptions)
+
+            animateElements.forEach(el => {
+                el.style.opacity = '0'
+                el.style.transform = 'translateY(25px)'
+                el.style.willChange = 'opacity, transform'
+                el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+                animateObserver.observe(el)
+            })
+        }
 
         return () => {
-            window.removeEventListener('scroll', highlightActiveNavLink)
-            animateObserver.disconnect()
+            window.removeEventListener('scroll', onScroll)
+            window.removeEventListener('resize', computeOffsets)
+            if (animateObserver) animateObserver.disconnect()
         }
     }, [])
 
@@ -111,7 +146,17 @@ export default function HomePage({ navigate }) {
                 <div className="container hero-container">
                     <div className="hero-avatar-wrapper">
                         <div className="avatar-glow-ring">
-                            <img src="/images/image.png" alt="Vicente Avatar" style={{ width: '125px', height: '125px', borderRadius: '50%', objectFit: 'cover' }} />
+                            <img
+                                src="/images/image.png"
+                                alt="Vicente Avatar"
+                                width="125"
+                                height="125"
+                                loading="eager"
+                                fetchPriority="high"
+                                decoding="sync"
+                                className="hero-avatar-img"
+                                style={{ width: '125px', height: '125px', borderRadius: '50%', objectFit: 'cover' }}
+                            />
                         </div>
                     </div>
 
@@ -147,7 +192,15 @@ export default function HomePage({ navigate }) {
                 <div className="container">
                     <div className="glass-card" style={{ padding: '2.5rem', maxWidth: '850px', margin: '0 auto', textAlign: 'center' }}>
                         <h2 className="section-title" style={{ marginBottom: '1rem' }}>Sobre mí</h2>
-                        <img src="/images/image.png" alt="Vicente Avatar" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }} />
+                        <img
+                            src="/images/image.png"
+                            alt="Vicente Avatar"
+                            width="100"
+                            height="100"
+                            loading="lazy"
+                            decoding="async"
+                            style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
+                        />
                         <p style={{ fontSize: '1.15rem', lineHeight: '1.8', color: 'var(--text-main)' }}>
                             &quot;Desarrollador enfocado en construir desde sistemas web y APIs hasta mecanismos físicos con IoT y videojuegos interactivos. Disfruto transformar ideas abstractas en código funcional, explorando siempre la frontera entre el software y el hardware.&quot;
                         </p>
