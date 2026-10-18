@@ -471,11 +471,11 @@ export default function HomePage({ navigate }) {
                         <div className="skill-category-box glass-card text-center">
                             <h3 className="category-title"><i className="fa-solid fa-desktop"></i> Front end</h3>
                             <div className="skill-tags">
-                                <span class="stack-item" data-tech="html"><i class="fa-brands fa-html5 stack-item-icon"></i> HTML</span>
-                                <span className="skill-chip"><i className="devicon-css3-plain colored"></i> CSS</span>
-                                <span className="skill-chip"><i className="devicon-javascript-plain colored"></i> JavaScript</span>
-                                <span className="skill-chip"><i className="devicon-figma-plain colored"></i> Figma</span>
-                                <span className="stack-item" data-tech="react"><i className="fa-brands fa-react stack-item-icon"></i>React</span>
+                                <span className="stack-item" data-tech="html"><i className="fa-brands fa-html5 stack-item-icon"></i> HTML</span>
+                                <span className="stack-item" data-tech="css"><i className="fa-brands fa-css3-alt stack-item-icon"></i> CSS</span>
+                                <span className="stack-item" data-tech="javascript"><i className="fa-brands fa-js stack-item-icon"></i> JavaScript</span>
+                                <span className="stack-item" data-tech="figma"><i className="fa-brands fa-figma stack-item-icon"></i> Figma</span>
+                                <span className="stack-item" data-tech="react"><i className="fa-brands fa-react stack-item-icon"></i> React</span>
                             </div>
                         </div>
 
@@ -483,13 +483,13 @@ export default function HomePage({ navigate }) {
                         <div className="skill-category-box glass-card text-center">
                             <h3 className="category-title"><i className="fa-solid fa-server"></i> Backend</h3>
                             <div className="skill-tags">
-                                <span className="skill-chip chip-purple"><i className="devicon-php-plain colored"></i> PHP</span>
-                                <span className="skill-chip chip-purple"><i className="devicon-nodejs-plain colored"></i> Node.js</span>
-                                <span className="skill-chip chip-purple"><i className="devicon-mysql-plain colored"></i> MySQL</span>
-                                <span className="skill-chip chip-purple"><i className="devicon-mariadb-plain colored"></i> MariaDB</span>
-                                <span className="skill-chip chip-purple"><i className="devicon-mongodb-plain colored"></i> MongoDB</span>
-                                <span className="skill-chip chip-purple"><i className="devicon-nginx-original colored"></i> Nginx</span>
-                                <span className="skill-chip chip-purple"><i className="fa-solid fa-server"></i> WAMPP</span>
+                                <span className="stack-item" data-tech="php"><i className="fa-brands fa-php stack-item-icon"></i> PHP</span>
+                                <span className="stack-item" data-tech="node"><i className="fa-brands fa-node-js stack-item-icon"></i> Node.js</span>
+                                <span className="stack-item" data-tech="mysql"><i className="devicon-mysql-plain colored stack-item-icon"></i> MySQL</span>
+                                <span className="stack-item" data-tech="mariadb"><i className="devicon-mariadb-plain colored stack-item-icon"></i> MariaDB</span>
+                                <span className="stack-item" data-tech="mongodb"><i className="devicon-mongodb-plain colored stack-item-icon"></i> MongoDB</span>
+                                <span className="stack-item" data-tech="nginx"><i className="devicon-nginx-original colored stack-item-icon"></i> Nginx</span>
+                                <span className="stack-item" data-tech="wampp"><i className="fa-solid fa-server stack-item-icon"></i> WAMPP</span>
                             </div>
                         </div>
 
@@ -497,12 +497,12 @@ export default function HomePage({ navigate }) {
                         <div className="skill-category-box glass-card text-center">
                             <h3 className="category-title"><i className="fa-solid fa-wrench"></i> Herramientas</h3>
                             <div className="skill-tags">
-                                <span className="skill-chip chip-green"><i className="devicon-git-plain colored"></i> Git</span>
-                                <span className="skill-chip chip-green"><i className="devicon-github-original"></i> GitHub</span>
-                                <span className="skill-chip chip-green"><i className="fa-solid fa-terminal"></i> Terminal</span>
-                                <span className="skill-chip chip-green"><i className="devicon-vscode-plain colored"></i> VSCode</span>
-                                <span className="skill-chip chip-green"><i className="devicon-npm-original-wordmark colored"></i> Antigravity</span>
-                                <span className="skill-chip chip-green"><i className="devicon-amazonwebservices-plain-wordmark colored"></i> AWS services</span>
+                                <span className="stack-item" data-tech="git"><i className="fa-brands fa-git-alt stack-item-icon"></i> Git</span>
+                                <span className="stack-item" data-tech="github"><i className="fa-brands fa-github stack-item-icon"></i> GitHub</span>
+                                <span className="stack-item" data-tech="terminal"><i className="fa-solid fa-terminal stack-item-icon"></i> Terminal</span>
+                                <span className="stack-item" data-tech="vscode"><i className="devicon-vscode-plain colored stack-item-icon"></i> VSCode</span>
+                                <span className="stack-item" data-tech="antigravity"><i className="fa-solid fa-atom stack-item-icon"></i> Antigravity</span>
+                                <span className="stack-item" data-tech="aws"><i className="fa-brands fa-aws stack-item-icon"></i> AWS services</span>
                             </div>
                         </div>
 
@@ -510,7 +510,7 @@ export default function HomePage({ navigate }) {
                         <div className="skill-category-box glass-card text-center">
                             <h3 className="category-title"><i className="fa-solid fa-graduation-cap"></i> Aprendiendo</h3>
                             <div className="skill-tags">
-                                <span className="stack-item" data-tech="python"><i className="fa-brands fa-python stack-item-icon"></i>Python</span>
+                                <span className="stack-item" data-tech="python"><i className="fa-brands fa-python stack-item-icon"></i> Python</span>
                                 <span className="stack-item" data-tech="javascript"><i className="fa-brands fa-js stack-item-icon"></i> JavaScript</span>
                             </div>
                         </div>

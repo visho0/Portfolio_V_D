@@ -453,7 +453,8 @@ body {
     gap: 10px;
 }
 
-.skill-chip {
+.skill-chip,
+.stack-item {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -464,18 +465,32 @@ body {
     font-family: var(--font-code);
     font-size: 0.9rem;
     color: var(--text-main);
-    transition: all 0.25s ease;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+    user-select: none;
 }
 
-.skill-chip i {
+.skill-chip i,
+.stack-item i,
+.stack-item-icon {
     font-size: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease, filter 0.25s ease;
 }
 
-.skill-chip:hover {
+.skill-chip:hover,
+.stack-item:hover {
     border-color: var(--accent-cyan);
     background: rgba(0, 242, 254, 0.1);
     box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);
     transform: translateY(-3px);
+}
+
+.stack-item:hover .stack-item-icon,
+.skill-chip:hover i {
+    transform: scale(1.18);
 }
 
 .skill-chip.chip-cyan:hover {
@@ -484,22 +499,106 @@ body {
     box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
 }
 
-.skill-chip.chip-purple:hover {
+.skill-chip.chip-purple:hover,
+.skill-category-box:nth-child(2) .stack-item:hover {
     border-color: var(--accent-purple);
     background: rgba(157, 78, 221, 0.12);
     box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
 }
 
-.skill-chip.chip-green:hover {
+.skill-chip.chip-green:hover,
+.skill-category-box:nth-child(3) .stack-item:hover {
     border-color: var(--accent-green);
     background: rgba(0, 245, 160, 0.12);
     box-shadow: 0 4px 15px rgba(0, 245, 160, 0.3);
 }
 
-.skill-chip.chip-gold:hover {
+.skill-chip.chip-gold:hover,
+.skill-category-box:nth-child(4) .stack-item:hover {
     border-color: var(--accent-gold);
     background: rgba(255, 190, 11, 0.12);
     box-shadow: 0 4px 15px rgba(255, 190, 11, 0.3);
+}
+
+/* Acentos de color e iluminación por tecnología en hover */
+.stack-item[data-tech="react"]:hover {
+    border-color: #61dafb;
+    box-shadow: 0 4px 18px rgba(97, 218, 251, 0.35);
+}
+.stack-item[data-tech="react"]:hover .stack-item-icon {
+    color: #61dafb;
+}
+
+.stack-item[data-tech="javascript"]:hover {
+    border-color: #f7df1e;
+    box-shadow: 0 4px 18px rgba(247, 223, 30, 0.35);
+}
+.stack-item[data-tech="javascript"]:hover .stack-item-icon {
+    color: #f7df1e;
+}
+
+.stack-item[data-tech="python"]:hover {
+    border-color: #ffd43b;
+    box-shadow: 0 4px 18px rgba(255, 212, 59, 0.35);
+}
+.stack-item[data-tech="python"]:hover .stack-item-icon {
+    color: #ffd43b;
+}
+
+.stack-item[data-tech="html"]:hover {
+    border-color: #e34f26;
+    box-shadow: 0 4px 18px rgba(227, 79, 38, 0.35);
+}
+.stack-item[data-tech="html"]:hover .stack-item-icon {
+    color: #e34f26;
+}
+
+.stack-item[data-tech="css"]:hover {
+    border-color: #264de4;
+    box-shadow: 0 4px 18px rgba(38, 77, 228, 0.35);
+}
+.stack-item[data-tech="css"]:hover .stack-item-icon {
+    color: #264de4;
+}
+
+.stack-item[data-tech="php"]:hover {
+    border-color: #777bb4;
+    box-shadow: 0 4px 18px rgba(119, 123, 180, 0.35);
+}
+.stack-item[data-tech="php"]:hover .stack-item-icon {
+    color: #8892bf;
+}
+
+.stack-item[data-tech="node"]:hover {
+    border-color: #68a063;
+    box-shadow: 0 4px 18px rgba(104, 160, 99, 0.35);
+}
+.stack-item[data-tech="node"]:hover .stack-item-icon {
+    color: #68a063;
+}
+
+.stack-item[data-tech="git"]:hover {
+    border-color: #f05032;
+    box-shadow: 0 4px 18px rgba(240, 80, 50, 0.35);
+}
+.stack-item[data-tech="git"]:hover .stack-item-icon {
+    color: #f05032;
+}
+
+.stack-item[data-tech="aws"]:hover {
+    border-color: #ff9900;
+    box-shadow: 0 4px 18px rgba(255, 153, 0, 0.35);
+}
+.stack-item[data-tech="aws"]:hover .stack-item-icon {
+    color: #ff9900;
+}
+
+.stack-item[data-tech="antigravity"]:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 4px 18px rgba(0, 242, 254, 0.4);
+}
+.stack-item[data-tech="antigravity"]:hover .stack-item-icon {
+    color: var(--accent-cyan);
 }
 
 /* --- Proyectos Section --- */
