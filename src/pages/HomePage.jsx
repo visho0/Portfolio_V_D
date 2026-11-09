@@ -107,14 +107,13 @@ export default function HomePage({ navigate }) {
                     <div className="hero-avatar-wrapper">
                         <div className="avatar-glow-ring">
                             <img
-                                src="/images/image.png"
+                                src="/images/imagen_icon.jpeg"
                                 alt="Vicente Avatar"
                                 width="125"
                                 height="125"
                                 loading="eager"
                                 fetchPriority="high"
                                 decoding="sync"
-                                className="hero-avatar-img"
                                 style={{ width: '125px', height: '125px', borderRadius: '50%', objectFit: 'cover' }}
                             />
                         </div>
@@ -152,17 +151,9 @@ export default function HomePage({ navigate }) {
                 <div className="container">
                     <div className="glass-card" style={{ padding: '2.5rem', maxWidth: '850px', margin: '0 auto', textAlign: 'center' }}>
                         <h2 className="section-title" style={{ marginBottom: '1rem' }}>Sobre mí</h2>
-                        <img
-                            src="/images/image.png"
-                            alt="Vicente Avatar"
-                            width="100"
-                            height="100"
-                            loading="lazy"
-                            decoding="async"
-                            style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }}
-                        />
+
                         <p style={{ fontSize: '1.15rem', lineHeight: '1.8', color: 'var(--text-main)' }}>
-                            &quot;Desarrollador enfocado en construir desde sistemas web y APIs hasta mecanismos físicos con IoT y videojuegos interactivos. Disfruto transformar ideas abstractas en código funcional, explorando siempre la frontera entre el software y el hardware.&quot;
+                            &quot;Soy Desarrollador enfocado en construir desde sistemas web y APIs hasta mecanismos físicos con IoT y videojuegos interactivos. Disfruto transformar ideas abstractas en código funcional, explorando siempre la frontera entre el software y el hardware.&quot;
                         </p>
                     </div>
                 </div>
