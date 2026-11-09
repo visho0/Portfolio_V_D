@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
 import ProyectoDulceria from './pages/ProyectoDulceria'
 import ProyectoTerapeutas from './pages/ProyectoTerapeutas'
+import ProyectoSeguridad from './pages/ProyectoSeguridad'
 
 function App() {
     const [currentPage, setCurrentPage] = useState(() => {
@@ -53,6 +54,10 @@ function App() {
             case '/proyecto-terapeutas':
             case '/proyecto-terapeutas-chile':
                 return <ProyectoTerapeutas navigate={navigate} />
+            case '/proyecto-seguridad':
+            case '/auditoria-seguridad':
+            case '/proyecto-auditoria':
+                return <ProyectoSeguridad navigate={navigate} />
             case '/':
             default:
                 return <HomePage navigate={navigate} />

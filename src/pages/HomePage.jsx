@@ -1,36 +1,7 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function HomePage({ navigate }) {
     const mainRef = useRef(null)
-    const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false)
-
-    const openSecurityModal = useCallback((e) => {
-        if (e && e.preventDefault) e.preventDefault()
-        setIsSecurityModalOpen(true)
-    }, [])
-
-    const closeSecurityModal = useCallback(() => {
-        setIsSecurityModalOpen(false)
-    }, [])
-
-    // Lock body scroll & handle Escape key when modal is open
-    useEffect(() => {
-        if (isSecurityModalOpen) {
-            document.body.style.overflow = 'hidden'
-            const handleEsc = (e) => {
-                if (e.key === 'Escape') {
-                    closeSecurityModal()
-                }
-            }
-            window.addEventListener('keydown', handleEsc)
-            return () => {
-                document.body.style.overflow = ''
-                window.removeEventListener('keydown', handleEsc)
-            }
-        } else {
-            document.body.style.overflow = ''
-        }
-    }, [isSecurityModalOpen, closeSecurityModal])
 
     useEffect(() => {
         // --- Smooth Scroll e Indicador Navegación Activa Optimizado (Cero Layout Thrashing) ---
@@ -281,11 +252,11 @@ export default function HomePage({ navigate }) {
                             className="project-card glass-card text-center"
                             id="card-security-audit"
                             style={{ cursor: 'pointer' }}
-                            onClick={openSecurityModal}
+                            onClick={(e) => handleProjectClick(e, '/proyecto-seguridad')}
                             role="button"
                             tabIndex={0}
                             aria-label="Ver detalles del proyecto Auditoría de Seguridad y Pentesting"
-                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openSecurityModal(e) }}
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleProjectClick(e, '/proyecto-seguridad') }}
                         >
                             <div className="project-header">
                                 <span className="project-badge badge-green"><i className="fa-solid fa-shield-halved"></i> Ciberseguridad</span>
@@ -305,153 +276,11 @@ export default function HomePage({ navigate }) {
                                 <span className="tech-tag">Pentesting</span>
                             </div>
                             <div className="project-footer">
-                                <a href="#" className="project-link" onClick={openSecurityModal}>
-                                    <i className="fa-solid fa-shield-halved"></i> Ver detalles <i className="fa-solid fa-chevron-right"></i>
+                                <a href="/proyecto-seguridad" className="project-link" onClick={(e) => handleProjectClick(e, '/proyecto-seguridad')}>
+                                    <i className="fa-solid fa-shield-halved"></i> Ver Detalles <i className="fa-solid fa-chevron-right"></i>
                                 </a>
                             </div>
                         </article>
-
-                        {/* ===== MODAL: Auditoría de Seguridad y Pentesting ===== */}
-                        <div
-                            className={`project-modal${isSecurityModalOpen ? ' is-active' : ''}`}
-                            id="modal-security"
-                            role="dialog"
-                            aria-modal="true"
-                            aria-labelledby="modal-security-title"
-                            onClick={(e) => { if (e.target === e.currentTarget || e.target.classList.contains('modal-overlay')) closeSecurityModal() }}
-                        >
-                            <div className="modal-overlay" onClick={closeSecurityModal}></div>
-                            <div className="modal-dialog-wrapper">
-                                <div className="modal-content-card" onClick={(e) => e.stopPropagation()}>
-                                    {/* Botón cerrar */}
-                                    <button
-                                        className="modal-close-button"
-                                        onClick={closeSecurityModal}
-                                        aria-label="Cerrar modal"
-                                        title="Cerrar"
-                                    >
-                                        <i className="fa-solid fa-xmark"></i>
-                                    </button>
-
-                                    {/* Encabezado del modal */}
-                                    <div className="modal-header-section">
-                                        <div className="modal-badges-row">
-                                            <span className="modal-pill-tag" style={{ background: 'rgba(0, 245, 160, 0.15)', color: 'var(--accent-green)', borderColor: 'rgba(0, 245, 160, 0.3)' }}>
-                                                <i className="fa-solid fa-shield-halved"></i> Ciberseguridad
-                                            </span>
-                                            <span className="modal-pill-tag" style={{ background: 'rgba(0, 242, 254, 0.15)', color: 'var(--accent-cyan)', borderColor: 'rgba(0, 242, 254, 0.3)' }}>
-                                                <i className="fa-solid fa-user-secret"></i> Pentesting
-                                            </span>
-                                        </div>
-                                        <h2 className="modal-project-title" id="modal-security-title">Auditoría de Seguridad y Pentesting</h2>
-                                        <p className="modal-project-subtitle">Auditoría de Seguridad y Pentesting en entorno controlado</p>
-                                        <div className="modal-project-focus">
-                                            <i className="fa-solid fa-crosshairs"></i>
-                                            <strong>Enfoque:</strong> Explotación de vulnerabilidades, aplicación de normativas OWASP e ISO 27000, y generación de informes técnicos basados en resultados.
-                                        </div>
-                                    </div>
-
-                                    {/* Sección 1: Rol y Descripción */}
-                                    <div className="modal-section-block">
-                                        <div className="modal-block-title">
-                                            <span className="block-number">1</span>
-                                            <h3>Descripción del Proyecto</h3>
-                                        </div>
-                                        <div className="modal-role-card">
-                                            <div className="role-badge-pill">
-                                                <i className="fa-solid fa-shield-virus"></i> Entorno de Pruebas Controlado
-                                            </div>
-                                            <p className="role-description">
-                                                Auditoría de Seguridad y Pentesting en entorno controlado. Desarrollo de ejercicios prácticos
-                                                de intrusión y pruebas de penetración (pentesting) diseñadas para evaluar la solidez defensiva,
-                                                detectar vectores de ataque y mitigar riesgos en infraestructuras informáticas.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* Sección 2: Enfoque Técnico y Metodología */}
-                                    <div className="modal-section-block">
-                                        <div className="modal-block-title">
-                                            <span className="block-number">2</span>
-                                            <h3>Enfoque Técnico y Metodología</h3>
-                                        </div>
-                                        <p className="modal-lead-text">
-                                            Pilares fundamentales aplicados durante el ciclo de auditoría:
-                                        </p>
-                                        <div className="modules-grid">
-                                            <div className="module-card">
-                                                <div className="module-icon-box">
-                                                    <i className="fa-solid fa-bug-slash"></i>
-                                                </div>
-                                                <div>
-                                                    <p className="module-title">Explotación Controlada</p>
-                                                    <p className="module-desc">Detección y explotación de vulnerabilidades en ambientes seguros y aislados.</p>
-                                                </div>
-                                            </div>
-                                            <div className="module-card">
-                                                <div className="module-icon-box">
-                                                    <i className="fa-solid fa-shield-virus"></i>
-                                                </div>
-                                                <div>
-                                                    <p className="module-title">Normativas OWASP</p>
-                                                    <p className="module-desc">Evaluación sistemática de riesgos siguiendo los estándares OWASP Top 10.</p>
-                                                </div>
-                                            </div>
-                                            <div className="module-card module-card-highlight">
-                                                <div className="module-icon-box">
-                                                    <i className="fa-solid fa-file-contract"></i>
-                                                </div>
-                                                <div>
-                                                    <p className="module-title">Estándares ISO 27000</p>
-                                                    <p className="module-desc">Alineación con directrices de seguridad de la información y buenas prácticas ISO/IEC 27001/2.</p>
-                                                </div>
-                                            </div>
-                                            <div className="module-card module-card-highlight">
-                                                <div className="module-icon-box">
-                                                    <i className="fa-solid fa-file-invoice"></i>
-                                                </div>
-                                                <div>
-                                                    <p className="module-title">Informes Técnicos</p>
-                                                    <p className="module-desc">Generación de documentación técnica exhaustiva basada en resultados reales y recomendaciones de mitigación.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Sección 3: Tecnologías y Herramientas Clave */}
-                                    <div className="modal-section-block">
-                                        <div className="modal-block-title">
-                                            <span className="block-number">3</span>
-                                            <h3>Tecnologías y Herramientas Clave</h3>
-                                        </div>
-                                        <div className="tech-chips-list">
-                                            <span className="tech-chip">
-                                                <i className="devicon-linux-plain colored"></i> Kali Linux
-                                            </span>
-                                            <span className="tech-chip">
-                                                <i className="fa-solid fa-server"></i> Máquinas Virtuales
-                                            </span>
-                                            <span className="tech-chip">
-                                                <i className="fa-solid fa-terminal"></i> Herramientas de Pentesting
-                                            </span>
-                                            <span className="tech-chip">
-                                                <i className="fa-solid fa-shield-halved"></i> OWASP Top 10
-                                            </span>
-                                            <span className="tech-chip">
-                                                <i className="fa-solid fa-certificate"></i> ISO 27000
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    {/* Pie del modal */}
-                                    <div className="modal-footer-section">
-                                        <button className="btn btn-outline" onClick={closeSecurityModal}>
-                                            <i className="fa-solid fa-xmark"></i> Cerrar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
